@@ -11,6 +11,8 @@ public:
 	List();
 	~List();
 
+	void pop_front();
+	void clear();
 	void push_back(T data);
 	int getSize() {
 		return Size;
@@ -43,7 +45,24 @@ List<T>::List() {
 
 template<typename T>
 List<T>::~List() {
+	clear();
+}
 
+template<typename T>
+void List<T>::pop_front()
+{
+	Node<T> *temp = head;
+	head = head->pNext;
+	delete temp;
+	Size--;
+}
+
+template<typename T>
+void List<T>::clear()
+{
+	while (Size) {
+		pop_front();
+	}
 }
 
 template<typename T>
@@ -78,15 +97,21 @@ T& List<T>::operator[](const int index)
 int main()
 {
 	List<int> lst;
-	int numberCount;
-	cin >> numberCount;
-	for (int i = 0; i < numberCount; i++)
-	{
-		lst.push_back(rand() % 10);
-	}
+	lst.push_back(55);
+	lst.push_back(11);
+	lst.push_back(2);
+
 	for (int i = 0; i < lst.getSize(); i++)
 	{
 		cout << lst[i] << endl;
-
 	}
+	
+	cout << endl << "Elements in list " << lst.getSize() << " pop_front" << endl << endl;
+
+	lst.clear();
+
+	for (int i = 0; i < lst.getSize(); i++) {
+		cout << lst[i] << endl;
+	}
+	cout << endl << "Elemens in list " << lst.getSize() << endl;
 }
