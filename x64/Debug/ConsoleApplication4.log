@@ -1,3 +1,3 @@
 ﻿  ConsoleApplication4.cpp
-F:\source\repos\ConsoleApplication4\ConsoleApplication4\ConsoleApplication4.cpp(95): warning C4715: List<int>::operator[]: значение возвращается не при всех путях выполнения
+F:\source\repos\ConsoleApplication4\ConsoleApplication4\ConsoleApplication4.cpp(152): warning C4715: List<int>::operator[]: значение возвращается не при всех путях выполнения
   ConsoleApplication4.vcxproj -> F:\source\repos\ConsoleApplication4\x64\Debug\ConsoleApplication4.exe

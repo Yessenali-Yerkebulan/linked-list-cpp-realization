@@ -12,6 +12,10 @@ public:
 	~List();
 
 	void pop_front();
+	void pop_back();
+	void push_front(T data);
+	void insert(T value, int index);
+	void removeAt(int index);
 	void clear();
 	void push_back(T data);
 	int getSize() {
@@ -58,6 +62,59 @@ void List<T>::pop_front()
 }
 
 template<typename T>
+void List<T>::pop_back()
+{
+	removeAt(Size - 1);
+}
+
+template<typename T>
+void List<T>::push_front(T data)
+{
+	head = new Node<T>(data, head);
+	Size++;
+}
+
+template<typename T>
+void List<T>::insert(T value, int index)
+{
+	if (index == 0) {
+		push_front(value);
+	}
+	else {
+		Node<T>* previous = this->head;
+
+		for (int i = 0; i < index - 1; i++)
+		{
+			previous = previous->pNext;
+		}
+
+		Node<T>* newNode = new Node<T>(value, previous->pNext);
+		previous->pNext = newNode;
+		Size++;
+	}
+	
+}
+
+template<typename T>
+void List<T>::removeAt(int index)
+{
+	if (index == 0) {
+		pop_front();
+	}
+	else {
+		Node<T>* previous = this->head;
+		for (int i = 0; i < index-1; i++)
+		{
+			previous = previous->pNext;
+		}
+		Node<T>* toDelete = previous->pNext;
+		previous->pNext = toDelete->pNext;
+		delete toDelete;
+		Size--;
+	}
+}
+
+template<typename T>
 void List<T>::clear()
 {
 	while (Size) {
@@ -100,18 +157,17 @@ int main()
 	lst.push_back(55);
 	lst.push_back(11);
 	lst.push_back(2);
-
+	lst.push_front(56);
 	for (int i = 0; i < lst.getSize(); i++)
 	{
 		cout << lst[i] << endl;
 	}
 	
-	cout << endl << "Elements in list " << lst.getSize() << " pop_front" << endl << endl;
-
-	lst.clear();
-
-	for (int i = 0; i < lst.getSize(); i++) {
+	cout << "---------------" << endl;
+	lst.insert(99, 1);
+	lst.pop_back();
+	for (int i = 0; i < lst.getSize(); i++)
+	{
 		cout << lst[i] << endl;
 	}
-	cout << endl << "Elemens in list " << lst.getSize() << endl;
 }
